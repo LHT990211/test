@@ -7,22 +7,31 @@ Validate
     
     在validate文件夹的php文件中一般都会默认先执行
     protected $rule = [
-    ['name', 'require|max:10','分类名必须传递|分类名不能超过10个字符']，
-    ]；
+            'name' => 'require|max:25',
+            'email' => 'email',
+            'logo' => 'require',
+            'city_id' => 'require',
+            'bank_info' => 'require',
+            'bank_name' => 'require',
+            'bank_user' => 'require',
+            'faren' => 'require',
+            'faren_tel' => 'require',
+        ];
     
     
-    如果你在php文件中定义了其他的变量名时，你在调用的时候，必须要去调用一个变量名
+    在场景设置中，你可以对上面$rule设置的属性，进行筛选行的进行校验
     /**场景设置**/
-    protected $scene = [
-        'add'  => ['name', 'parent_id'],//添加
-        'listorder' => ['id', 'listorder'],//排序
-    ]
+    protected  $scene = [
+            'add' => ['name', 'email', 'logo', 'city_id', 'bank_info', 'bank_name', 'bank_user', 'faren', 'faren_tel'],
+        ];
     
 在controller控制台调用时：
 
     $data = input('post.')//接收前端穿过来的信息
     $validate = validate('Category(在validate中的php文件名)')；
-    $validate->check($data)//默认调用$rule
-    $validate->scene('add')->check($data) //调用了scene里面的add
+    //默认调用$rule
+    $validate->check($data)
+    //不想对rule里面的所有属性进行校验时，可以调用scene里面自己设置好的属性
+    $validate->scene('add')->check($data) 
         
     

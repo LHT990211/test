@@ -21,7 +21,7 @@ tp5邮箱发送信息
              *
              * @return \think\Response
              */
-            public function index()
+            public function index($eamil,$title,$content)
             {
                 import('phpmailer.src.Exception', EXTEND_PATH);
                 import('phpmailer.src.PHPMailer', EXTEND_PATH);
@@ -42,7 +42,7 @@ tp5邮箱发送信息
                     $mail->Port = 465;                            // 服务器端口 25 或者465 具体要看邮箱服务器支持
         
                     $mail->setFrom('15876766724@163.com', 'Mailer');  //发件人
-                    $mail->addAddress('2449382217@qq.com', 'Joe');  // 收件人
+                    $mail->addAddress($eamil, 'Joe');  // 收件人
                     //$mail->addAddress('ellen@example.com');  // 可添加多个收件人
                     $mail->addReplyTo('15876766724@163.com', 'info'); //回复的时候回复给哪个邮箱 建议和发件人一致
                     //$mail->addCC('cc@example.com');                    //抄送
@@ -54,11 +54,11 @@ tp5邮箱发送信息
         
                     //Content
                     $mail->isHTML(true);                                  // 是否以HTML文档格式发送  发送后客户端可直接显示对应HTML内容
-                    $mail->Subject = '这里是邮件标题' . time();
-                    $mail->Body    = '<h1>这里是邮件内容</h1>' . date('Y-m-d H:i:s');
+                    $mail->Subject = $title;
+                    $mail->Body    = '<h1>.$content.</h1>' . date('Y-m-d H:i:s');
                     $mail->AltBody = '如果邮件客户端不支持HTML则显示此内容';
         
-                    $mail->send();
+                    $mail->send($eamil,$title,$content);
                     echo '邮件发送成功';
                 } catch (Exception $e) {
                     echo '邮件发送失败: ', $mail->ErrorInfo;
