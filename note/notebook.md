@@ -1,19 +1,19 @@
-```php
-1.6反射
+
+# 1.6反射
 
 
         面向对象编程中对象被赋予了自省的能力，而这个自省的过程就是反射
         
        一般会用到对象的时候是：
-       1、对对象进行测试
-       2、获取类的信息
+        1. 对对象进行测试
+        2. 获取类的信息
         
-    作用：
+###作用：
     
         反射可以用于文档生成。因此可以用它对文件里的类型进行扫描，逐个生成描述文档
         
         
-构造方法__construct()
+##构造方法__construct()
 
         1.PHP 构造方法 __construct() 允许在实例化一个类之前先执行构造方法。
         
@@ -28,13 +28,13 @@
         能带有任何参数，其名称必须是 __destruct() 。
  
        
-__call()方法
+##__call()方法
 
         __call()方法。当调用一个没有在类中声明的方法时，可以调用__call()
         方法代替声明一个方法。接受方法名和数组作为参数。
         
         
-Reflection 
+##Reflection 
        
        
         PHP Reflection API是PHP5才有的新功能，它是用来导出或提取出关于类、
@@ -45,14 +45,14 @@ Reflection
         其中又有一些属性或方法能返回对应的Reflection对象
         
       
-1.7异常和错误的处理
+#1.7异常和错误的处理
 
-    捕获异常的方式有两种：
+ ####捕获异常的方式有两种：
         1、立刻捕获
         2、分散异常集中捕获
         
         
-    错误常见的几种：
+ #### 错误常见的几种：
         1、deprecated（可正常运行）
             低级错误，表示“不推荐、不建议”
         2、notice（可正常运行）
@@ -64,7 +64,7 @@ Reflection
             致命错误
             
             
-    错误的处理机制
+ ####错误的处理机制
     
         a、set_error_handler
             1、接管错误的处理
@@ -95,9 +95,46 @@ Reflection
                 echo '错误信息：',$e ->getMessage();
             }
             
+            
+ #函数
+ 
+ ###isset()用来检测一个变量是否已声明且值不为NULL
+ 
+ 
+ 
+ 
+ ###sort()、usort()、ksort()
+ 
+ * usort() 使用用户自定义的比较函数对数组进行排序。
+    >usort(array,myfunction);
+    >>array	必需。规定要排序的数组。
+      myfunction	可选。一个定义了可调用比较函数的字符串。
+      如果第一个参数 <, =, > 第二个参数，相应地比较函数必须返回一个 
+      <, =, > 0 的整数。
+   
+ ```php
+
+        $a = array(
+            array("sky", "blue"),
+            array("apple", "red"),
+            array("tree", "green")
+        );
     
+        function my_compare($a, $b) {
+            if($a[1] < $b[1]) {
+                return -1;
+            } else if ($a[1] == $b[1]) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+        usort ($a, 'my_compare');
+        foreach($a as $elem) {
+            echo "$elem[0] : $elem[1]<br />";
+        }
         
-        
+ ```     
         
         
         
